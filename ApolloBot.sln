@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2003
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApolloBot", "ApolloBot\ApolloBot.csproj", "{FDC1BE6A-4B1F-44FE-BDF9-A4BFB146BBBD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FDC1BE6A-4B1F-44FE-BDF9-A4BFB146BBBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDC1BE6A-4B1F-44FE-BDF9-A4BFB146BBBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDC1BE6A-4B1F-44FE-BDF9-A4BFB146BBBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDC1BE6A-4B1F-44FE-BDF9-A4BFB146BBBD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AA92AA5C-B176-46BB-882B-A195CFE1FE12}
+	EndGlobalSection
+EndGlobal
