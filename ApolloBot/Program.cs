@@ -1,4 +1,4 @@
-﻿using Discord;
+using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,7 +11,7 @@ namespace ApolloBot
     class Program
     {
         static void Main(string[] args) => new Program().Run_Bot_Async().GetAwaiter().GetResult();
-        string _bot_token = "NDgzNjE3NDMyNTk0ODA4ODM0.DmWGdQ.oqikX_dZLOaubkmv1MUjoUVj3MY";
+        string _bot_token = "";
         string _bot_prefix = "££";
         
         private DiscordSocketClient _client;
