@@ -29,13 +29,12 @@ namespace ApolloBot.Modules
             await ReplyAsync("", false, builder.Build());
         }
 
-        [Command("test message")]
+        [Command("test")]
         public async Task Test_Async()
         {
             await ReplyAsync($"{Context.Client.CurrentUser.Mention} || {Context.User.Mention} sent {Context.Message.Content} in {Context.Guild.Name}!");
         }
-
-
+        
         [Command("dik")]
         public async Task Context_Test_Async([Remainder] string name = "dom")
         {
@@ -54,8 +53,7 @@ namespace ApolloBot.Modules
 
             await ReplyAsync($"{username} is banned");
         }
-
-
+        
         [Command("xml")]
         public async Task XML_Print()
         {
@@ -66,10 +64,12 @@ namespace ApolloBot.Modules
         }
 
         [Command("thanos")]
-        public async Task thanos()
+        public async Task Thanos()
         {
             int numUsers = Context.Guild.Users.Count;
             int numDead = numUsers / 2;
+            int currentNumDead = 0;
+            Random rnd = new Random();
 
             List<string> usersList = new List<string>();
 
@@ -79,11 +79,19 @@ namespace ApolloBot.Modules
             usersList = DiscordFunctions.GetUsers(guild);
 
             foreach (string user in usersList)
-            {                
-                await ReplyAsync($"{user} is Dead");
+            {
+                int i = rnd.Next(0, 1);
+                if (i != 0 && currentNumDead != numDead)
+                {
+                    await ReplyAsync($"{user} is Dead");
+                    currentNumDead += 1;
+                }
+                else
+                {
+                    await ReplyAsync($"{user} has Survived");
+                }
             }
-            await ReplyAsync("Thanos has Decided");
+            await ReplyAsync("Apollo has Decided");
         }
-
     }
 }   
