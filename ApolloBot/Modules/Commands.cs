@@ -82,12 +82,12 @@ namespace ApolloBot.Modules
             List<string> usersList = new List<string>();
             List<string> aliveList = new List<string>();
             List<string> deadList = new List<string>();
-            //List<IUser> iusers = new List<IUser>();
-            var guild = Context.Guild as SocketGuild;
+
+            var guild = Context.Guild as SocketGuild; // Instance of the server
 
             usersList = DiscordFunctions.GetUsers(guild); //Get Users from server
 
-            EmbedBuilder builder = new EmbedBuilder(); // Build GUI
+            EmbedBuilder builder = new EmbedBuilder(); // Build/Format the GUI
             builder.WithTitle("Apollo commited genocide!");
             builder.WithDescription("Who has Apollo Killed?");
             builder.WithColor(Color.Teal);
@@ -105,7 +105,7 @@ namespace ApolloBot.Modules
                     if (currentNumAlive != numAlive)
                     {
                         currentNumAlive += 1;
-                        aliveList.Add(user);
+                        aliveList.Add(user); 
                     }
                     else
                     {
@@ -120,24 +120,24 @@ namespace ApolloBot.Modules
             foreach (string user in aliveList)
             {
                 string temp = alive;
-                alive = $"{temp}  {user}  ";
+                alive = $"{temp}  {user}  "; //create string for alive users
             }
 
             foreach (string user in deadList)
             {
-
                 string temp = dead;
-                dead = $"{temp}  {user}  ";
+                dead = $"{temp}  {user}  "; // create string for dead users.
             }
-            builder.AddInlineField("Total Spared:", $"{aliveList.Count.ToString()}");
+
+            builder.AddInlineField("Total Spared:", $"{aliveList.Count.ToString()}"); 
             builder.AddInlineField("Total Killed:", $"{deadList.Count.ToString()}");
-            builder.AddInlineField("Alive: ", alive);        
+            builder.AddInlineField("Alive: ", alive);       // finish adding strings to the formatted message
             builder.AddInlineField("Dead: ", dead);
             builder.WithAuthor(Context.User);
-            builder.WithImageUrl("https://nerdist.com/wp-content/uploads/2018/05/Thanos.jpg");
+            builder.WithImageUrl("https://nerdist.com/wp-content/uploads/2018/05/Thanos.jpg"); //Image of Thanos
             await ReplyAsync("", false, builder.Build());
-            await ReplyAsync("Apollo Has Decided");
-            await Context.Message.DeleteAsync(null);
+
+            await Context.Message.DeleteAsync(null); //Delete the message that called this function
         }
     }
 }   
