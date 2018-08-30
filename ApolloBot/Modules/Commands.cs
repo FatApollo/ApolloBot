@@ -33,12 +33,15 @@ namespace ApolloBot.Modules
         public async Task Test_Async()
         {
             await ReplyAsync($"{Context.Client.CurrentUser.Mention} || {Context.User.Mention} sent {Context.Message.Content} in {Context.Guild.Name}!");
+            await Context.Message.DeleteAsync(null);
         }
         
         [Command("dik")]
         public async Task Context_Test_Async([Remainder] string name = "dom")
         {
             await ReplyAsync($"{name} is a dik");
+
+            await Context.Message.DeleteAsync(null);
         }
 
         [Command("ban"), RequireUserPermission(GuildPermission.BanMembers)]
@@ -52,6 +55,7 @@ namespace ApolloBot.Modules
             await Context.Guild.AddBanAsync(username, 7, "You are a dick", options);
                        
             await ReplyAsync($"{username} is banned");
+            await Context.Message.DeleteAsync(null);
         }
         
         [Command("xml")]
@@ -61,6 +65,8 @@ namespace ApolloBot.Modules
             test.CreateXMLFile();
 
             await ReplyAsync("Xml Is Created");
+
+            await Context.Message.DeleteAsync(null);
         }
 
         [Command("thanos"), RequireUserPermission(GuildPermission.Administrator)]
@@ -125,12 +131,13 @@ namespace ApolloBot.Modules
             }
             builder.AddInlineField("Total Spared:", $"{aliveList.Count.ToString()}");
             builder.AddInlineField("Total Killed:", $"{deadList.Count.ToString()}");
-            builder.AddInlineField("Alive", alive);        
-            builder.AddInlineField("Dead", dead);
+            builder.AddInlineField("Alive: ", alive);        
+            builder.AddInlineField("Dead: ", dead);
             builder.WithAuthor(Context.User);
             builder.WithImageUrl("https://nerdist.com/wp-content/uploads/2018/05/Thanos.jpg");
             await ReplyAsync("", false, builder.Build());
             await ReplyAsync("Apollo Has Decided");
+            await Context.Message.DeleteAsync(null);
         }
     }
 }   
