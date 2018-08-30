@@ -16,7 +16,7 @@ namespace ApolloBot.Modules
         //Context.Message;
         XML test = new XML();
 
-        [Command("testfunc")]
+        /*[Command("testfunc")]
         public async Task Test_Func()
         {
             EmbedBuilder builder = new EmbedBuilder();
@@ -27,7 +27,7 @@ namespace ApolloBot.Modules
             builder.WithColor(Color.Teal);
             builder.WithImageUrl("https://i.ytimg.com/vi/iqPqylKy-bY/maxresdefault.jpg");
             await ReplyAsync("", false, builder.Build());
-        }
+        }*/
 
         [Command("test")]
         public async Task Test_Async()
@@ -48,9 +48,9 @@ namespace ApolloBot.Modules
             options.AuditLogReason = $"banned by {Context.Client.CurrentUser} using ApolloBot";
 
             Console.WriteLine($"{username}");
-
-            await Context.Guild.AddBanAsync(username,7,"You are a dick", options);
-
+            
+            await Context.Guild.AddBanAsync(username, 7, "You are a dick", options);
+                       
             await ReplyAsync($"{username} is banned");
         }
         
@@ -63,35 +63,74 @@ namespace ApolloBot.Modules
             await ReplyAsync("Xml Is Created");
         }
 
-        [Command("thanos")]
+        [Command("thanos"), RequireUserPermission(GuildPermission.Administrator)]
         public async Task Thanos()
         {
             int numUsers = Context.Guild.Users.Count;
             int numDead = numUsers / 2;
+            int numAlive = numUsers - numDead;
             int currentNumDead = 0;
+            int currentNumAlive = 0;
             Random rnd = new Random();
 
             List<string> usersList = new List<string>();
-
+            List<string> aliveList = new List<string>();
+            List<string> deadList = new List<string>();
             //List<IUser> iusers = new List<IUser>();
             var guild = Context.Guild as SocketGuild;
 
-            usersList = DiscordFunctions.GetUsers(guild);
+            usersList = DiscordFunctions.GetUsers(guild); //Get Users from server
+
+            EmbedBuilder builder = new EmbedBuilder(); // Build GUI
+            builder.WithTitle("Apollo commited genocide!");
+            builder.WithDescription("Who has Apollo Killed?");
+            builder.WithColor(Color.Teal);
 
             foreach (string user in usersList)
             {
                 int i = rnd.Next(0, 1);
-                if (i != 0 && currentNumDead != numDead)
+                if (i == 0 && currentNumDead != numDead)
                 {
-                    await ReplyAsync($"{user} is Dead");
                     currentNumDead += 1;
+                    deadList.Add(user);
                 }
                 else
                 {
-                    await ReplyAsync($"{user} has Survived");
+                    if (currentNumAlive != numAlive)
+                    {
+                        currentNumAlive += 1;
+                        aliveList.Add(user);
+                    }
+                    else
+                    {
+                        currentNumDead += 1;
+                        deadList.Add(user);
+                    }
                 }
             }
-            await ReplyAsync("Apollo has Decided");
+
+            string alive = "";
+            string dead = "";
+            foreach (string user in aliveList)
+            {
+                string temp = alive;
+                alive = $"{temp}  {user}  ";
+            }
+
+            foreach (string user in deadList)
+            {
+
+                string temp = dead;
+                dead = $"{temp}  {user}  ";
+            }
+            builder.AddInlineField("Total Spared:", $"{aliveList.Count.ToString()}");
+            builder.AddInlineField("Total Killed:", $"{deadList.Count.ToString()}");
+            builder.AddInlineField("Alive", alive);        
+            builder.AddInlineField("Dead", dead);
+            builder.WithAuthor(Context.User);
+            builder.WithImageUrl("https://nerdist.com/wp-content/uploads/2018/05/Thanos.jpg");
+            await ReplyAsync("", false, builder.Build());
+            await ReplyAsync("Apollo Has Decided");
         }
     }
 }   
