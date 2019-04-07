@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Users>
+  <User>
+    <UserID>101</UserID>
+    <Username>Apollo</Username>
+    <Rank>Admin</Rank>
+    <Level>100</Level>
+    <XP>0</XP>
+    <IsBanned>False</IsBanned>
+    <BanReason>Not Banned</BanReason>
+    <Notes>None</Notes>
+  </User>
+  <User>
+    <UserID>102</UserID>
+    <Username>Dom</Username>
+    <Rank>User</Rank>
+    <Level>100</Level>
+    <XP>0</XP>
+    <IsBanned>False</IsBanned>
+    <BanReason>Not Banned</BanReason>
+    <Notes>None</Notes>
+  </User>
+  <User>
+    <UserID>103</UserID>
+    <Username>Cawky</Username>
+    <Rank>Moderator</Rank>
+    <Level>100</Level>
+    <XP>0</XP>
+    <IsBanned>False</IsBanned>
+    <BanReason>Not Banned</BanReason>
+    <Notes>None</Notes>
+  </User>
+</Users>

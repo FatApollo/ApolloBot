@@ -1,3 +1,4 @@
+using ApolloBot.Modules;
 using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
@@ -10,76 +11,32 @@ namespace ApolloBot
 {
     class Program
     {
-        static void Main(string[] args) => new Program().Run_Bot_Async().GetAwaiter().GetResult();
-        string _bot_token = "";
-        string _bot_prefix = "££";
-        
-        private DiscordSocketClient _client;
-        private CommandService _commands;
-        private IServiceProvider _services;
-                       
+        static void Main(string[] args) => new Program().Run_Bot_Async().GetAwaiter().GetResult();       
+
+        Events discordEvents = new Events();
+
         public async Task Run_Bot_Async()
         {
-            _client = new DiscordSocketClient();
-            _commands = new CommandService();
-            _services = new ServiceCollection()
-                .AddSingleton(_client)
-                .AddSingleton(_commands)
+            BotInformation info = new BotInformation();
+
+            DiscordSocketClient client = new DiscordSocketClient();
+            CommandService commands = new CommandService();
+            IServiceProvider services = new ServiceCollection()
+                .AddSingleton(client)
+                .AddSingleton(commands)
                 .BuildServiceProvider();
 
 
-            //event supscriptions
-            _client.Log += Log;
-            _client.UserJoined += Announced_User_Joined;
+            info.Init("NDgzNjE3NDMyNTk0ODA4ODM0.XKniWQ.kB_fcEKyi6pOIaynD_J7FbPH6vs", "££", client, commands, services);
+                
+            discordEvents.Init(info);
 
-            await Register_Commands_Async();
-            await _client.LoginAsync(TokenType.Bot, _bot_token);
-            await _client.StartAsync();
+            await discordEvents.Register_Commands_Async();
+            await info._client.LoginAsync(TokenType.Bot, info._bot_token);
+            await info._client.StartAsync();
             await Task.Delay(-1);
 
-        }
-
-        public async Task Register_Commands_Async()
-        {
-            _client.MessageReceived += Handle_Command_Async;
-            await _commands.AddModulesAsync(Assembly.GetEntryAssembly());
-        }
-
-        private async Task Handle_Command_Async(SocketMessage arg)
-        {
-            var message = arg as SocketUserMessage;
-            
-            if (message is null || message.Author.IsBot) return;
-
-            int argPos = 0;
-
-            if (message.HasStringPrefix(_bot_prefix,ref argPos) || message.HasMentionPrefix(_client.CurrentUser,ref argPos))
-            {
-                var context = new SocketCommandContext(_client, message);
-                var result = await _commands.ExecuteAsync(context, argPos, _services);
-
-                if (!result.IsSuccess)
-                {
-                    Console.WriteLine(result.ErrorReason);
-                }
-            }
-        }
-
-        private async Task Announced_User_Joined(SocketGuildUser user)
-        {
-            var guild = user.Guild;//guild info stored in the user
-            var channel = guild.DefaultChannel; //SocketTextChannel 
-            await channel.SendMessageAsync($"Welcome, {user.Mention}");
-            
-        }
-
-        private Task Log(LogMessage logMessage)
-        {
-            Console.WriteLine(logMessage);
-
-            return Task.CompletedTask;
-
-        }
+        }        
 
     }
 }

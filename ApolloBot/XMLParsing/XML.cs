@@ -23,7 +23,7 @@ namespace ApolloBot.Modules
 
         }
 
-        public void CreateXMLFile()
+        public void CreateXMLFileUsers()
         {
             XmlTextWriter writer = new XmlTextWriter("Users.xml", System.Text.Encoding.UTF8);
             writer.WriteStartDocument(true);
@@ -49,7 +49,7 @@ namespace ApolloBot.Modules
                 writer.WriteValue($"{instance.GetXP()}");
                 writer.WriteEndElement();
                 writer.WriteStartElement("IsBanned");
-                writer.WriteValue($"{instance.GetBanned()}");
+                writer.WriteValue($"{instance.GetBanStatus()}");
                 writer.WriteEndElement();
                 writer.WriteStartElement("BanReason");
                 writer.WriteValue($"{instance.GetBanReason()}");
