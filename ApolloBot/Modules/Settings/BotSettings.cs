@@ -9,6 +9,12 @@ namespace ApolloBot.Modules.Settings
         private string _bot_token;
         private string _bot_prefix;
         
+        public BotSettings()
+        {
+            _bot_prefix = "££";
+            _bot_token = "";
+        }
+        
         public string GetBotToken()
         {
             return _bot_token;
