@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ApolloBot.Modules
 {
-    class XMLInstance
+    public class User
     {
         private string userid;
         private string username;
@@ -31,7 +31,7 @@ namespace ApolloBot.Modules
         }
 
         public string GetID()
-        {            
+        {
             return userid;
         }
 
@@ -72,8 +72,8 @@ namespace ApolloBot.Modules
         }
 
         public int GetLevel()
-  
-      {
+
+        {
             return level;
         }
 
@@ -101,7 +101,7 @@ namespace ApolloBot.Modules
         {
             banreason = newbanreason;
         }
-        
+
         public string GetNotes()
         {
             return notes;

@@ -4,12 +4,14 @@ using System.Data;
 using System.Xml;
 using System.Text;
 using ApolloBot.Modules;
+using ApolloBot.Modules.XP;
+using ApolloBot.Modules.Settings;
 
 namespace ApolloBot.Modules
 {
     class XML
     {
-        List<XMLInstance> xmlList = new List<XMLInstance>();
+        List<User> xmlList = new List<User>();
 
         public void InitXML()
         {
@@ -18,8 +20,11 @@ namespace ApolloBot.Modules
             AddXMLEntry("103", "Cawky", "Moderator", 0, 100, false, "Not Banned", "None");
         }
 
-        public void LoadXML()
+        public void LoadXML(BotSettings settings)
         {
+            //Run on Startup or Load when Called.
+            //Load Settings.XML
+            //Load Users.XML
 
         }
 
@@ -30,7 +35,7 @@ namespace ApolloBot.Modules
             writer.Formatting = Formatting.Indented;
             writer.Indentation = 2;
             writer.WriteStartElement("Users");
-            foreach(XMLInstance instance in xmlList)
+            foreach(User instance in xmlList)
             {
                 writer.WriteStartElement("User");
                 writer.WriteStartElement("UserID");
@@ -68,7 +73,7 @@ namespace ApolloBot.Modules
 
         public void AddXMLEntry(string uid, string uname, string urank, int uxp, int ulevel, bool uisbanned, string ubanreason, string unotes)
         {
-            XMLInstance instance = new XMLInstance();
+            User instance = new User();
             instance.Init(uid, uname, urank, uxp, ulevel, uisbanned, ubanreason, unotes);
             xmlList.Add(instance);
         }
@@ -78,12 +83,12 @@ namespace ApolloBot.Modules
 
         }
 
-        public void ReturnXMLEntryByUN(string username, XMLInstance instance)
+        public void ReturnXMLEntryByUN(string username, User instance)
         {
 
         }
 
-        public void ReturnXMLEntryByUID(string userID, XMLInstance instance)
+        public void ReturnXMLEntryByUID(string userID, User instance)
         {
 
         }
