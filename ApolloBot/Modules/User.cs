@@ -13,6 +13,8 @@ namespace ApolloBot.Modules
         private int xp;
         private int level;
 
+        private int karma;
+
         private bool banned;
         private string banreason;
 
@@ -61,6 +63,16 @@ namespace ApolloBot.Modules
             xp = new_xp;
         }
 
+        public int GetKarma()
+        {
+            return karma;
+        }
+
+        public void SetKarma(int new_karma)
+        {
+            karma = new_karma;
+        }
+        
         public string GetRank()
         {
             return rank;

@@ -5,7 +5,6 @@ using Discord.Commands;
 using Discord.WebSocket;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Reflection;
 using System.Threading.Tasks;
 
 namespace ApolloBot
@@ -24,10 +23,12 @@ namespace ApolloBot
         public async Task Run_Bot_Async()
         {
             XMLReader.LoadXML(settings);
-            
+
             IServiceProvider services = new ServiceCollection()
+                .AddSingleton(this)
                 .AddSingleton(client)
                 .AddSingleton(commands)
+                .AddSingleton(settings)
                 .BuildServiceProvider();
             
             info.Init(settings.GetBotToken(), settings.GetBotPrefix(), client, commands, services);

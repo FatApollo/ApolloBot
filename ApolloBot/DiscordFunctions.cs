@@ -21,7 +21,6 @@ namespace ApolloBot.Modules
             }
 
             return usersList;
-
         }
     }
 }

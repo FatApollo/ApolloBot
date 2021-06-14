@@ -23,7 +23,8 @@ namespace ApolloBot.Modules
             _client = Client;
             _commands = Commands;
             _services = Services;
-        }
 
+        }
     }
+
 }
